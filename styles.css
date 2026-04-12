@@ -1,0 +1,498 @@
+/* ========================================
+   GLOBAL RESPONSIVE STYLES FOR NMIMS TRACKER
+   Compatible: Mobile (320px), Tablet (768px), Desktop (1024px+)
+   ======================================== */
+
+/* ===== GLOBAL RESETS & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+h1 { font-size: clamp(1.5rem, 4vw, 2.8rem); }
+h2 { font-size: clamp(1.3rem, 3.5vw, 2.2rem); }
+h3 { font-size: clamp(1.1rem, 3vw, 1.8rem); }
+h4 { font-size: clamp(1rem, 2.5vw, 1.4rem); }
+
+p { margin-bottom: 1rem; }
+
+a {
+    color: #c41e3a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #8B0000;
+    text-decoration: underline;
+}
+
+/* ===== FORM ELEMENTS ===== */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="number"], 
+input[type="tel"],
+input[type="date"],
+select, 
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 16px; /* Prevents zoom on iOS */
+    background: #f9f9f9;
+    color: #2c3e50;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="password"]:focus, 
+input[type="number"]:focus, 
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus, 
+textarea:focus {
+    outline: none;
+    border-color: #c41e3a;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.1);
+    transform: translateY(-2px);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #999;
+    opacity: 0.7;
+}
+
+/* ===== BUTTONS ===== */
+.btn, button {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #c41e3a 0%, #8B0000 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(196, 30, 58, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.btn:hover, button:hover {
+    background: linear-gradient(135deg, #8B0000 0%, #6B0000 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(196, 30, 58, 0.35);
+}
+
+.btn:active, button:active {
+    transform: translateY(-1px);
+}
+
+.btn.full-width, button.full-width {
+    width: 100%;
+}
+
+/* ===== MESSAGES ===== */
+.message, .error-message, .success-message, .info-message {
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    border-left: 4px solid;
+    animation: slideDown 0.5s ease-out;
+}
+
+.error-message {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    color: #d32f2f;
+    border-left-color: #d32f2f;
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.1);
+}
+
+.success-message {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #155724;
+    border-left-color: #28a745;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+}
+
+.info-message {
+    background: linear-gradient(135deg, #cfe9ff 0%, #b3e5fc 100%);
+    color: #01579b;
+    border-left-color: #0288d1;
+    box-shadow: 0 4px 12px rgba(2, 136, 209, 0.15);
+}
+
+/* ===== CONTAINERS & LAYOUTS ===== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.gap-1 { gap: 10px; }
+.gap-2 { gap: 20px; }
+.gap-3 { gap: 30px; }
+
+/* ===== GRID LAYOUT ===== */
+.grid {
+    display: grid;
+    gap: 24px;
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== LOADING ANIMATION ===== */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    margin-top: 15px;
+    color: #3498db;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ===== UTILITIES ===== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.hidden { display: none; }
+.visible { display: block; }
+
+.mt-1 { margin-top: 10px; }
+.mt-2 { margin-top: 20px; }
+.mt-3 { margin-top: 30px; }
+
+.mb-1 { margin-bottom: 10px; }
+.mb-2 { margin-bottom: 20px; }
+.mb-3 { margin-bottom: 30px; }
+
+.p-1 { padding: 10px; }
+.p-2 { padding: 20px; }
+.p-3 { padding: 30px; }
+
+/* ===== RESPONSIVE TYPOGRAPHY ===== */
+@media (max-width: 1024px) {
+    html { font-size: 14px; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+}
+
+@media (max-width: 768px) {
+    html { font-size: 13px; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.3rem; }
+    
+    h3 { font-size: 1.1rem; }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .grid-2, .grid-3 { 
+        grid-template-columns: 1fr; 
+    }
+    
+    input[type="text"], 
+    input[type="email"], 
+    input[type="password"], 
+    input[type="number"], 
+    input[type="tel"],
+    input[type="date"],
+    select, 
+    textarea {
+        padding: 10px 12px;
+        font-size: 16px;
+        border-radius: 6px;
+    }
+    
+    .btn, button {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        border-radius: 6px;
+    }
+    
+    .flex {
+        flex-direction: column;
+    }
+    
+    .message, .error-message, .success-message, .info-message {
+        padding: 12px 16px;
+        margin-bottom: 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    html { font-size: 12px; }
+    
+    h1 { font-size: 1.3rem; }
+    h2 { font-size: 1.1rem; }
+    h3 { font-size: 1rem; }
+    
+    .container {
+        padding: 0 10px;
+    }
+    
+    .card {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+    
+    input[type="text"], 
+    input[type="email"], 
+    input[type="password"], 
+    input[type="number"], 
+    input[type="tel"],
+    input[type="date"],
+    select, 
+    textarea {
+        padding: 8px 10px;
+        border-radius: 4px;
+    }
+    
+    .btn, button {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        border-radius: 4px;
+    }
+    
+    .btn.full-width, button.full-width {
+        width: 100%;
+    }
+    
+    .gap-1 { gap: 8px; }
+    .gap-2 { gap: 12px; }
+    .gap-3 { gap: 16px; }
+}
+
+/* ===== VISIBILITY CLASSES ===== */
+.show-mobile { display: none; }
+.hide-mobile { display: block; }
+
+@media (max-width: 768px) {
+    .show-mobile { display: block; }
+    .hide-mobile { display: none; }
+}
+
+/* ===== TABLE RESPONSIVENESS ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table th {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    font-weight: 700;
+    color: #c41e3a;
+}
+
+table tr:hover {
+    background: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 0.85rem;
+    }
+    
+    table th, table td {
+        padding: 8px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ===== IMAGE RESPONSIVENESS ===== */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.logo img {
+    width: 120px;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .logo img {
+        width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo img {
+        width: 60px;
+    }
+}
+
+/* ===== BADGE STYLING ===== */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #c41e3a;
+    color: white;
+    animation: bounce 0.6s infinite;
+}
+
+.badge.success { background: #28a745; }
+.badge.warning { background: #ffc107; }
+.badge.danger { background: #dc3545; }
+.badge.info { background: #0288d1; }

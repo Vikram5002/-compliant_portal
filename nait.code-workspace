@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../002"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "nait"
+	}
+}
