@@ -26,6 +26,11 @@
 |------|---------|
 | [cprtl.sql](cprtl.sql) | Complete database schema and sample data |
 
+### AWS Migration Starter
+| File | Purpose |
+|------|---------|
+| [aws_migration/README.md](aws_migration/README.md) | Step-by-step migration from XAMPP/MySQL to DynamoDB + Amplify |
+
 ---
 
 ## 🎯 Feature Overview

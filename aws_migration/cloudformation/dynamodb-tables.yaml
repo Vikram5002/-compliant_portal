@@ -1,0 +1,315 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CPRTL DynamoDB table set for migration from MySQL
+
+Parameters:
+  TablePrefix:
+    Type: String
+    Default: cprtl
+    Description: Prefix for DynamoDB table names
+
+Resources:
+  AllowedRolesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${TablePrefix}_allowed_roles'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: role_id
+          AttributeType: N
+        - AttributeName: role_name
+          AttributeType: S
+      KeySchema:
+        - AttributeName: role_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: gsi_role_name
+          KeySchema:
+            - AttributeName: role_name
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${TablePrefix}_users'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: user_id
+          AttributeType: N
+        - AttributeName: sap_id
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: role
+          AttributeType: S
+        - AttributeName: parent_staff_id
+          AttributeType: N
+      KeySchema:
+        - AttributeName: user_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: gsi_sap_id
+          KeySchema:
+            - AttributeName: sap_id
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_email
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_role_parent
+          KeySchema:
+            - AttributeName: role
+              KeyType: HASH
+            - AttributeName: parent_staff_id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  AttachmentsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${TablePrefix}_attachments'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: attachment_id
+          AttributeType: N
+        - AttributeName: file_path
+          AttributeType: S
+      KeySchema:
+        - AttributeName: attachment_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: gsi_file_path
+          KeySchema:
+            - AttributeName: file_path
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+  TicketsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${TablePrefix}_tickets'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: ticket_id
+          AttributeType: N
+        - AttributeName: user_id
+          AttributeType: N
+        - AttributeName: assigned_to
+          AttributeType: N
+        - AttributeName: reassigned_to
+          AttributeType: N
+        - AttributeName: status
+          AttributeType: S
+        - AttributeName: created_at
+          AttributeType: S
+      KeySchema:
+        - AttributeName: ticket_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: gsi_creator_created
+          KeySchema:
+            - AttributeName: user_id
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_assigned_created
+          KeySchema:
+            - AttributeName: assigned_to
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_reassigned_created
+          KeySchema:
+            - AttributeName: reassigned_to
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_status_created
+          KeySchema:
+            - AttributeName: status
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  SubStaffApprovalsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${TablePrefix}_substaffapprovals'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: approval_id
+          AttributeType: N
+        - AttributeName: parent_staff_id
+          AttributeType: N
+        - AttributeName: ticket_id
+          AttributeType: N
+        - AttributeName: sub_staff_id
+          AttributeType: N
+        - AttributeName: submitted_at
+          AttributeType: S
+      KeySchema:
+        - AttributeName: approval_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: gsi_parent_submitted
+          KeySchema:
+            - AttributeName: parent_staff_id
+              KeyType: HASH
+            - AttributeName: submitted_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_ticket_submitted
+          KeySchema:
+            - AttributeName: ticket_id
+              KeyType: HASH
+            - AttributeName: submitted_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_substaff_submitted
+          KeySchema:
+            - AttributeName: sub_staff_id
+              KeyType: HASH
+            - AttributeName: submitted_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  StatusHistoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${TablePrefix}_statushistory'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: history_id
+          AttributeType: N
+        - AttributeName: ticket_id
+          AttributeType: N
+        - AttributeName: timestamp
+          AttributeType: S
+      KeySchema:
+        - AttributeName: history_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: gsi_ticket_timestamp
+          KeySchema:
+            - AttributeName: ticket_id
+              KeyType: HASH
+            - AttributeName: timestamp
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  NotificationsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${TablePrefix}_notifications'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: notification_id
+          AttributeType: N
+        - AttributeName: user_id
+          AttributeType: N
+        - AttributeName: ticket_id
+          AttributeType: N
+        - AttributeName: user_read_key
+          AttributeType: S
+        - AttributeName: created_at
+          AttributeType: S
+      KeySchema:
+        - AttributeName: notification_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: gsi_user_created
+          KeySchema:
+            - AttributeName: user_id
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_ticket_created
+          KeySchema:
+            - AttributeName: ticket_id
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_user_read_created
+          KeySchema:
+            - AttributeName: user_read_key
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  FeedbackTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${TablePrefix}_feedback'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: feedback_id
+          AttributeType: N
+        - AttributeName: ticket_id
+          AttributeType: N
+        - AttributeName: user_id
+          AttributeType: N
+        - AttributeName: created_at
+          AttributeType: S
+      KeySchema:
+        - AttributeName: feedback_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: gsi_ticket_created
+          KeySchema:
+            - AttributeName: ticket_id
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: gsi_user_created
+          KeySchema:
+            - AttributeName: user_id
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+Outputs:
+  AllowedRolesTableName:
+    Value: !Ref AllowedRolesTable
+  UsersTableName:
+    Value: !Ref UsersTable
+  AttachmentsTableName:
+    Value: !Ref AttachmentsTable
+  TicketsTableName:
+    Value: !Ref TicketsTable
+  SubStaffApprovalsTableName:
+    Value: !Ref SubStaffApprovalsTable
+  StatusHistoryTableName:
+    Value: !Ref StatusHistoryTable
+  NotificationsTableName:
+    Value: !Ref NotificationsTable
+  FeedbackTableName:
+    Value: !Ref FeedbackTable
