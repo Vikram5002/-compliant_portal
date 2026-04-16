@@ -29,6 +29,8 @@ Recommended production architecture:
   - Imports those JSON files into DynamoDB with retry for unprocessed items.
 - `frontend/amplify.yml`
   - Amplify build spec template for a future frontend app.
+- `LOCAL_SETUP_WINDOWS.md`
+  - One-time installation and verification steps for Git, AWS CLI, PHP, Node, and Amplify CLI.
 
 ## 3) One-Time Prerequisites
 
