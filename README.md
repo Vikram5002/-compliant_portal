@@ -30,6 +30,8 @@
 | File | Purpose |
 |------|---------|
 | [aws_migration/README.md](aws_migration/README.md) | Step-by-step migration from XAMPP/MySQL to DynamoDB + Amplify |
+| [frontend_app/README.md](frontend_app/README.md) | React frontend app for Cognito login and API Gateway integration |
+| [amplify.yml](amplify.yml) | Amplify build instructions for frontend_app |
 
 ---
 
@@ -113,6 +115,10 @@ System:
 - db_connect.php               (Database & session)
 - send_email.php               (Email service)
 - nav_helper.php               (Navigation)
+
+Cloud Frontend:
+- frontend_app/                (React app for Amplify Hosting)
+- amplify.yml                  (Amplify CI/CD build config)
 ```
 
 ### Documentation

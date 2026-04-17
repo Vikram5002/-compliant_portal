@@ -1,0 +1,22 @@
+version: 1
+applications:
+  - appRoot: frontend_app
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+            - echo "VITE_API_BASE_URL=$API_BASE_URL" > .env.production
+            - echo "VITE_APP_REGION=$APP_REGION" >> .env.production
+            - echo "VITE_COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID" >> .env.production
+            - echo "VITE_COGNITO_APP_CLIENT_ID=$COGNITO_APP_CLIENT_ID" >> .env.production
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: dist
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*

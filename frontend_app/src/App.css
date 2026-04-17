@@ -1,0 +1,258 @@
+.page-shell {
+  width: min(1200px, 100% - 2rem);
+  margin: 2rem auto 2.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero-header {
+  border-radius: 1.5rem;
+  padding: 2.2rem 2rem;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(28, 72, 107, 0.22) 0, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(228, 120, 62, 0.2) 0, transparent 48%),
+    linear-gradient(120deg, #0f2432 0%, #1d3a4f 40%, #2f5f6f 100%);
+  color: #f1f4f1;
+  box-shadow: 0 18px 30px rgba(5, 20, 33, 0.24);
+  animation: rise-in 380ms ease-out;
+}
+
+.kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #b8d8e2;
+}
+
+.hero-header h1 {
+  margin: 0.35rem 0 0.45rem;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  margin: 0;
+  max-width: 68ch;
+  color: #d9e4e7;
+}
+
+.layout-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.card {
+  border-radius: 1.25rem;
+  background: rgba(255, 252, 247, 0.84);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(14, 53, 72, 0.16);
+  box-shadow: 0 12px 24px rgba(12, 38, 52, 0.1);
+  padding: 1.15rem;
+  animation: rise-in 450ms ease-out;
+}
+
+.auth-card {
+  grid-column: span 4;
+}
+
+.actions-card {
+  grid-column: span 4;
+}
+
+.output-card {
+  grid-column: span 4;
+}
+
+.card h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  color: #0f2e3c;
+}
+
+.card-copy {
+  margin: 0 0 1rem;
+  color: #35596c;
+  font-size: 0.94rem;
+}
+
+.auth-form,
+.ticket-form {
+  display: grid;
+  gap: 0.68rem;
+}
+
+.auth-form label,
+.ticket-form label {
+  display: grid;
+  gap: 0.32rem;
+  color: #244b5d;
+  font-size: 0.88rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(37, 84, 104, 0.28);
+  border-radius: 0.72rem;
+  background: #ffffff;
+  color: #132d3a;
+  padding: 0.6rem 0.72rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #245f7d;
+  box-shadow: 0 0 0 3px rgba(46, 122, 157, 0.19);
+}
+
+.button-row,
+.button-grid {
+  display: grid;
+  gap: 0.56rem;
+}
+
+.button-row {
+  grid-template-columns: 1fr 1fr;
+}
+
+button {
+  border: none;
+  border-radius: 0.72rem;
+  padding: 0.65rem 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #eaf4f8;
+  background: linear-gradient(135deg, #215973, #18445a);
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.meta-grid {
+  margin: 0.95rem 0 0.6rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.28rem 0.6rem;
+  font-size: 0.84rem;
+}
+
+.meta-grid dt {
+  color: #406278;
+  font-weight: 700;
+}
+
+.meta-grid dd {
+  margin: 0;
+  color: #113244;
+}
+
+.notice {
+  border-radius: 0.75rem;
+  padding: 0.62rem 0.72rem;
+  font-size: 0.86rem;
+}
+
+.notice.neutral {
+  background: #e7edf0;
+  color: #314f61;
+}
+
+.notice.success {
+  background: #d7f4e4;
+  color: #16573a;
+}
+
+.notice.warn {
+  background: #fff1cb;
+  color: #7b4f11;
+}
+
+.notice.error {
+  background: #ffe1de;
+  color: #8c2a2a;
+}
+
+.token-preview {
+  margin: 0.7rem 0 0;
+  color: #3f6073;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.output-card pre {
+  margin: 0;
+  min-height: 380px;
+  max-height: 540px;
+  overflow: auto;
+  background: #132530;
+  color: #bde6dc;
+  border-radius: 0.82rem;
+  padding: 0.95rem;
+  line-height: 1.44;
+  font-size: 0.82rem;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .auth-card,
+  .actions-card,
+  .output-card {
+    grid-column: span 6;
+  }
+
+  .output-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-shell {
+    width: min(1200px, 100% - 1rem);
+    margin-top: 1rem;
+  }
+
+  .hero-header {
+    padding: 1.4rem 1rem;
+    border-radius: 1rem;
+  }
+
+  .auth-card,
+  .actions-card,
+  .output-card {
+    grid-column: 1 / -1;
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .output-card pre {
+    min-height: 240px;
+  }
+}
