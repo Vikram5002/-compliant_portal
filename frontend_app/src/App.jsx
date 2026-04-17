@@ -392,11 +392,13 @@ function App() {
       throw new Error('API base URL missing. Check VITE_API_BASE_URL.');
     }
 
-    if (!isSignedIn) {
+    let idToken;
+    try {
+      idToken = await refreshSessionPreview();
+    } catch {
       throw new Error('Please sign in first.');
     }
 
-    const idToken = await refreshSessionPreview();
     const response = await fetch(`${appConfig.apiBaseUrl}${path}`, {
       method,
       headers: {
