@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
-
 :root {
-  color: #143342;
-  background: #f2efe9;
-  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
-  line-height: 1.45;
+  color: #2c3e50;
+  background: #f5f7fa;
+  font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+  line-height: 1.6;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,10 +23,7 @@ body,
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(33, 109, 122, 0.2) 0, transparent 38%),
-    radial-gradient(circle at 88% 84%, rgba(230, 126, 60, 0.18) 0, transparent 42%),
-    linear-gradient(180deg, #efece4 0%, #f8f5f0 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 button,
@@ -39,5 +34,5 @@ textarea {
 
 pre,
 code {
-  font-family: 'IBM Plex Mono', Consolas, monospace;
+  font-family: Consolas, 'Courier New', monospace;
 }
